@@ -1,0 +1,72 @@
+[
+  {
+    "name": "PostgreSQL",
+    "description": "A powerful, open source object-relational database system.",
+    "icon": "https://raw.githubusercontent.com/haddockapp/templates/refs/heads/main/postgres/icon.png",
+    "versions": [
+      {
+        "label": "16-alpine",
+        "path": "postgres/16-alpine",
+        "compose": "compose.yml",
+        "env": [
+          {
+            "label": "User",
+            "key": "POSTGRES_USER",
+            "type": "plain",
+            "policy": "input"
+          },
+          {
+            "label": "Password",
+            "key": "POSTGRES_PASSWORD",
+            "type": "secret",
+            "policy": "input"
+          },
+          {
+            "label": "Database",
+            "key": "POSTGRES_DB",
+            "type": "plain",
+            "policy": "input"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "n8n",
+    "description": "n8n is a free and open node-based Workflow Automation Tool. Easily automate tasks, sync data between various services, and more.",
+    "icon": "https://raw.githubusercontent.com/haddockapp/templates/refs/heads/main/n8n/icon.png",
+    "versions": [
+      {
+        "label": "latest",
+        "path": "n8n/latest",
+        "compose": "compose.yml",
+        "env": [
+          {
+            "label": "Host",
+            "key": "N8N_HOST",
+            "type": "plain",
+            "policy": "input"
+          },
+          {
+            "label": "Webhook URL",
+            "key": "N8N_WEBHOOK_URL",
+            "type": "plain",
+            "policy": "input"
+          },
+          {
+            "label": "Encryption Key",
+            "key": "N8N_ENCRYPTION_KEY",
+            "type": "secret",
+            "policy": "generate"
+          },
+          {
+            "label": "PostgreSQL Password",
+            "key": "POSTGRES_PASSWORD",
+            "type": "secret",
+            "policy": "generate"
+          }
+        ]
+      }
+    ]
+  }
+]

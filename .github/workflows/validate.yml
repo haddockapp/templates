@@ -1,0 +1,54 @@
+name: Validate index.json schema
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install jsonschema
+        run: |
+          python -m pip install --upgrade pip
+          pip install jsonschema
+
+      - name: Validate index.json against index.schema.json
+        run: |
+          python - << 'PY'
+          import json
+          import sys
+          from jsonschema import Draft7Validator, FormatChecker
+
+          schema_path = "index.schema.json"
+          index_path = "index.json"
+
+          with open(schema_path, "r", encoding="utf-8") as f:
+              schema = json.load(f)
+
+          with open(index_path, "r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          validator = Draft7Validator(schema, format_checker=FormatChecker())
+          errors = sorted(validator.iter_errors(data), key=lambda e: e.path)
+
+          if errors:
+              print("index.json does NOT conform to index.schema.json:\n")
+              for error in errors:
+                  path = ".".join(str(p) for p in error.path)
+                  print(f"- At '{path or '<root>'}': {error.message}")
+              sys.exit(1)
+
+          print("✅ index.json is valid according to index.schema.json")
+          PY
