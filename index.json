@@ -1,10 +1,12 @@
 [
   {
+    "id": "postgresql",
     "name": "PostgreSQL",
     "description": "A powerful, open source object-relational database system.",
     "icon": "https://raw.githubusercontent.com/haddockapp/templates/refs/heads/main/postgres/icon.png",
     "versions": [
       {
+        "id": "16-alpine",
         "label": "16-alpine",
         "path": "postgres/16-alpine",
         "compose": "compose.yml",
@@ -32,11 +34,13 @@
     ]
   },
   {
+    "id": "n8n",
     "name": "n8n",
     "description": "n8n is a free and open node-based Workflow Automation Tool. Easily automate tasks, sync data between various services, and more.",
     "icon": "https://raw.githubusercontent.com/haddockapp/templates/refs/heads/main/n8n/icon.png",
     "versions": [
       {
+        "id": "latest",
         "label": "latest",
         "path": "n8n/latest",
         "compose": "compose.yml",

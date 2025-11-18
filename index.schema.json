@@ -4,9 +4,12 @@
   "type": "array",
   "items": {
     "type": "object",
-    "required": ["name", "description", "icon", "versions"],
+    "required": ["id", "name", "description", "icon", "versions"],
     "additionalProperties": false,
     "properties": {
+      "id": {
+        "type": "string"
+      },
       "name": {
         "type": "string"
       },
@@ -22,9 +25,12 @@
         "minItems": 1,
         "items": {
           "type": "object",
-          "required": ["label", "path", "compose", "env"],
+          "required": ["id", "label", "path", "compose", "env"],
           "additionalProperties": false,
           "properties": {
+            "id": {
+              "type": "string"
+            },
             "label": {
               "type": "string"
             },
